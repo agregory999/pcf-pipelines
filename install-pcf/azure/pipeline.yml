@@ -418,6 +418,7 @@ jobs:
       GARDEN_NETWORK_POOL_CIDR: {{garden_network_pool_cidr}}
       GARDEN_NETWORK_MTU: {{garden_network_mtu}}
       MYSQL_MONITOR_EMAIL: {{mysql_monitor_recipient_email}}
+      MYSQL_STATIC_IPS: {{mysql_static_ips}}
       MYSQL_BACKUPS: {{mysql_backups}}
       MYSQL_BACKUPS_SCP_SERVER: {{mysql_backups_scp_server}}
       MYSQL_BACKUPS_SCP_PORT: {{mysql_backups_scp_port}}

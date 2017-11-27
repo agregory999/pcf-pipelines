@@ -49,6 +49,7 @@ cf_properties=$(
     --arg disable_insecure_cookies "$DISABLE_INSECURE_COOKIES" \
     --arg router_request_timeout_seconds "$ROUTER_REQUEST_TIMEOUT_IN_SEC" \
     --arg mysql_monitor_email "$MYSQL_MONITOR_EMAIL" \
+    --arg mysql_static_ips "$MYSQL_STATIC_IPS" \
     --arg tcp_router_static_ips "$TCP_ROUTER_STATIC_IPS" \
     --arg company_name "$COMPANY_NAME" \
     --arg ssh_static_ips "$SSH_STATIC_IPS" \
@@ -143,6 +144,9 @@ cf_properties=$(
       },
       ".mysql_monitor.recipient_email": {
         "value": $mysql_monitor_email
+      },
+      ".mysql_proxy.static_ips": {
+        "value": $mysql_static_ips
       },
       ".tcp_router.static_ips": {
         "value": $tcp_router_static_ips
