@@ -55,7 +55,7 @@ resources:
 - name: pcf-pipelines
   type: git
   source:
-    uri: git@github.com:agregory999/pcf-pipelines.git
+    uri: git@github.com:agregory999/pcf-pipelines.git#azure-network
     branch: master
     private_key: {{git_private_key}}
 
