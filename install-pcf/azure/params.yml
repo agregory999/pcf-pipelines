@@ -294,3 +294,7 @@ tcp_routing_ports:                      # A comma-separated list of ports and hy
 
 # Optional PEM-encoded certificates to add to BOSH VMs
 trusted_certificates:
+
+# Added by Andrew Gregory to support using a network in another resource group
+azure_network_resource_group: pcf-network-3600
+
