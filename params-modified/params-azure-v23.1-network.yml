@@ -1,0 +1,380 @@
+# Whether to allow SSH access to application instances
+allow_app_ssh_access: false
+
+# Change to anything other than 'wipe' to bypass the wipe-env job
+arg_wipe: wipe
+
+authentication_mode: internal
+
+# If the azure_account_name is empty "", ERT will use internal storage. If you want ERT to use Azure blob store, provide a valid azure_account_name and azure_account_key values.
+azure_account_name: 
+
+# Required if Azure blob storage is used as external storage by ERT, which is determined by azure_account_name being not null. This setting is used to specify the container where the buildpacks will be stored. It is similar to the S3 bucket in AWS.
+azure_buildpacks_container: 
+
+azure_client_id: dc78855b-6f06-4661-b458-a6f708e681b5
+azure_client_secret: 7af05e05-2251-4d91-91ce-087c14ee97f1
+
+# Required if Azure blob storage is used as external storage by ERT, which is determined by azure_account_name being not null. This setting is used to specify the container where the droplets will be stored. It is similar to the S3 bucket in AWS.
+azure_droplets_container:
+
+# Required if using c0-azure-multi-res-group - The ERT infrastructure subnet name for your Azure environment
+azure_multi_resgroup_infra_subnet_name:
+
+# Required if using c0-azure-multi-res-group - The virutal network name for your Azure environment
+azure_multi_resgroup_infra_vnet_name:
+
+# Required if using c0-azure-multi-res-group - An existing network for your Azure environment
+azure_multi_resgroup_network:
+
+# Required if using c0-azure-multi-res-group - The resource group name for your Azure environment
+azure_multi_resgroup_pcf:
+
+# Private IP for the Operations Manager VM
+azure_opsman_priv_ip: 192.168.0.4
+
+# Required if Azure blob storage is used as external storage by ERT, which is determined by azure_account_name being not null. This setting is used to specify the container where the packages will be stored. It is similar to the S3 bucket in AWS.
+azure_packages_container:
+
+# The set of terraform templates and opsman configuration to use in the pipeline (c0-azure-base|c0-azure-multi-res-group)
+azure_pcf_terraform_template: c0-azure-base
+
+# a valid Azure region.
+azure_region: eastus
+
+# Required if Azure blob storage is used as external storage by ERT, which is determined by azure_account_name being not null. This setting is used to specify the container where the resources will be stored. It is similar to the S3 bucket in AWS.
+azure_resources_container:
+
+azure_subscription_id: d99987a1-6979-4cee-8bb6-9e412b5ebaaf
+azure_tenant_id: 29248f74-371f-4db2-9a50-c62a6877a0c1
+
+# Prefix to use for Terraform-managed infrastructure, e.g. 'pcf-terraform'
+# Must be globally unique.
+azure_terraform_prefix: pcf-azure-test
+
+# ERT-specific network configurations. Leave these as default unless you need to make changes to align with existing infrastructure.
+azure_terraform_subnet_dynamic_services_cidr: "192.168.12.0/22"
+azure_terraform_subnet_dynamic_services_dns: "168.63.129.16,8.8.8.8"
+azure_terraform_subnet_dynamic_services_gateway: "192.168.12.1"
+azure_terraform_subnet_dynamic_services_reserved: "192.168.12.1-192.168.12.9"
+azure_terraform_subnet_ert_cidr: "192.168.4.0/22"
+azure_terraform_subnet_ert_dns: "168.63.129.16,8.8.8.8"
+azure_terraform_subnet_ert_gateway: "192.168.4.1"
+azure_terraform_subnet_ert_reserved: "192.168.4.1-192.168.4.9"
+azure_terraform_subnet_infra_cidr: "192.168.0.0/26"
+azure_terraform_subnet_infra_dns: "168.63.129.16,8.8.8.8"
+azure_terraform_subnet_infra_gateway: "192.168.0.1"
+azure_terraform_subnet_infra_reserved: "192.168.0.1-192.168.0.9"
+azure_terraform_subnet_services1_cidr: "192.168.8.0/22"
+azure_terraform_subnet_services1_dns: "168.63.129.16,8.8.8.8"
+azure_terraform_subnet_services1_gateway: "192.168.8.1"
+azure_terraform_subnet_services1_reserved: "192.168.8.1-192.168.8.9"
+azure_terraform_vnet_cidr: "192.168.0.0/20"
+
+# azure_vm_admin value should match with user ID used to create the certs pcf_ssh_key_pub.
+# The user ID will appear towards the end of the public key.
+azure_vm_admin: ubuntu
+
+# Ciphers
+# An ordered, colon-delimited list of Golang supported TLS cipher suites in OpenSSL format.
+# Operators should verify that these are supported by any clients or downstream components that will initiate TLS handshakes with the Router/HAProxy.
+# The recommended settings are filled in below, change as necessary.
+router_tls_ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384"
+haproxy_tls_ciphers: "DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384"
+
+# Company Name for Apps Manager
+company_name: Pivotal AG
+
+# c2c networking network cidr
+container_networking_nw_cidr: 10.255.0.0/16
+
+# For credhub integration, Set the number of credhub instances in resource config to 2
+# Primary Encryption Name MUST match one of the encryption key names provided
+# Encryption keys 2 and 3 are optional
+credhub_primary_encryption_name: dummy encryption key 1
+credhub_encryption_key_name1: dummy encryption key 1
+credhub_encryption_key_secret1: mylongstringofwordsforcredhub
+
+credhub_encryption_key_name2: 
+credhub_encryption_key_secret2: 
+credhub_encryption_key_name3: 
+credhub_encryption_key_secret3: 
+
+default_quota_max_number_services: 1000
+default_quota_memory_limit_mb: 10240
+
+# Domain Names for ERT
+apps_domain: apps.pipeline.azure.arg-pivotal.com  # This is usually cfapps.${pcf_ert_domain}
+pcf_ert_domain: pipeline.azure.arg-pivotal.com # This is the domain you will access ERT with
+system_domain: sys.pipeline.azure.arg-pivotal.com # This is usually sys.${pcf_ert_domain}
+
+# This defines the deployment network name within PCF.
+deployment_network_name: "ert"
+
+# Disable HTTP on gorouters (true|false)
+disable_http_proxy: false
+
+# If true, disable insecure cookies on the router.
+disable_insecure_cookies: false
+
+# PCF Elastic Runtime minor version to track
+ert_major_minor_version: 2\.[0-9\]+\.[0-9]+$
+
+# Applications Network Maximum Transmission Unit bytes
+garden_network_mtu: 1454
+
+# Only change this if you need to avoid address collision with a third-party service on the same subnet.
+garden_network_pool_cidr: 10.254.0.0/22
+
+# Optional - if your git repo requires an SSH key.
+git_private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  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
+  -----END RSA PRIVATE KEY-----
+
+
+# Required if haproxy_forward_tls is enabled - HAProxy will use the CA provided to verify the certificates provided by the router.
+haproxy_backend_ca:
+
+# If enabled HAProxy will forward all requests to the router over TLS (enable|disable)
+haproxy_forward_tls: disable
+
+# The lb value can be obtained by prepending "web-lb" with "azure_terraform_prefix". For example, if your "azure_terraform_prefix" is "test", then the "ha_proxy_lb_name" is "test-web-lb".
+ha_proxy_lb_name: pcf-azure-test-web-lb 
+
+# Instances
+## These resources can take any parameter made available in
+## the ops manager API ( https://your-ops-man/docs#configuring-resources-for-a-job)
+backup_prepare_instances: 0
+clock_global_instances: 1
+cloud_controller_instances: 2
+cloud_controller_worker_instances: 2
+consul_server_instances: 3
+credhub_instances: 0
+diego_brain_instances: 3
+diego_cell_instances: 3
+diego_database_instances: 3
+doppler_instances: 3
+ha_proxy_instances: 1
+loggregator_trafficcontroller_instances: 1
+mysql_instances: 1
+mysql_monitor_instances: 0
+mysql_proxy_instances: 1
+nats_instances: 2
+nfs_server_instances: 1
+router_instances: 3
+syslog_adapter_instances: 3
+syslog_scheduler_instances: 2
+tcp_router_instances: 0
+uaa_instances: 2
+
+# Whether or not the ERT VMs are internet connected.
+internet_connected: false
+
+# IPs
+# Leave blank if you don't need to make changes to existing network infrastructure configs.
+ha_proxy_ips:           # Comma-separated list of static IPs
+router_static_ips:      # Comma-separated list of static IPs
+tcp_router_static_ips:  # Comma-separated list of static IPs
+ssh_static_ips:         # Comma-separated list of static IPs
+mysql_static_ips:       # Comma-separated list of static IPs
+
+# Loggegrator Port. Default is 443
+loggregator_endpoint_port: 443
+
+# Whether to enable MySQL backups. (disable|s3|scp)
+mysql_backups: disable
+
+# S3 backup config params (leave empty values if you're not using s3)
+mysql_backups_s3_access_key_id:
+mysql_backups_s3_bucket_name:
+mysql_backups_s3_bucket_path:
+mysql_backups_s3_cron_schedule:
+mysql_backups_s3_endpoint_url:
+mysql_backups_s3_secret_access_key:
+
+# SCP backup config params (leave empty values if you're not using scp)
+mysql_backups_scp_cron_schedule:
+mysql_backups_scp_destination:
+mysql_backups_scp_key:
+mysql_backups_scp_port:
+mysql_backups_scp_server:
+mysql_backups_scp_user:
+
+# Email address for sending mysql monitor notifications
+mysql_monitor_recipient_email: agregory@pivotal.io
+
+# opsman_admin_username/opsman_admin_password needs to be specified
+# These define the login values for the OpsMan UI.
+opsman_admin_password: admin00
+opsman_admin_username: admin
+
+# Opsman Settings
+opsman_domain_or_ip_address: opsman.pipeline.azure.arg-pivotal.com # This should be your pcf_ert_domain with "opsman." as a prefix. For example, opsman.pcf.example.com
+
+# PCF Ops Manager minor version to track
+opsman_major_minor_version: 2\.[0-9\]+\.[0-9]+$
+
+# SAML Service Credential provider Cert and Key, if the string is blank, then the pipeline will auto generate certs
+pcf_ert_saml_cert:
+pcf_ert_saml_key:
+
+pcf_opsman_disk_size_in_gb: 120
+
+# SSH keys for Operations Manager director
+# More information can be found in these locations.
+# 1. https://docs.pivotal.io/pivotalcf/2-0/customizing/pcf_azure.html#getting-started
+# 2. https://docs.pivotal.io/pivotalcf/2-0/customizing/azure-om-config.html#azure-config
+pcf_ssh_key_pub: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBZKp7mGAyVi+rMGn12iq2adNlrcoe+rlrCV/30UMMXfRVy3UgQUvZxxwyNuWuRlY73/yg69EJPol6mIt2gHlOnDTelWG0iOIkffy2gz5aFnImN3KnUYqx2n/2p6ZpahyIV/e0jq9W8OgyLKVC+imAWq+RjdjKfk64ORMeJrazOwhTF4kjIpt8NHC/A2tZksMTJJp0vNghMKluFK6A4e9XcMMCpsbF+o0G1p87qiDtcACvOo05CS9vHNI/Jn0H5/D8Alw08VQmzmqgC2jAgeCXLloiwyGVg26qqt6p85ODNLXuIy/Lmc0hsBGBP7fP+9QQADCdz/Xw3gfgqlg0Wnjt ubuntu"
+pcf_ssh_key_priv: |
+  -----BEGIN RSA PRIVATE KEY-----
+  MIIEpAIBAAKCAQEAwWSqe5hgMlYvqzBp9doqtmnTZa3KHvq5awlf99FDDF30Vct1
+  IEFL2cccMjblrkZWO9/8oOvRCT6JepiLdoB5Tpw03pVhtIjiJH38toM+WhZyJjdy
+  p1GKsdp/9qemaWociFf3tI6vVvDoMiylQvopgFqvkY3Yyn5OuDkTHia2szsIUxeJ
+  IyKbfDRwvwNrWZLDEySadLzYITCpbhSugOHvV3DDAqbGxfqNBtafO6og7XAArzqN
+  OQkvbxzSPyZ9B+fw/AJcNPFUJs5qoAtowIHgly5aIsMhlYNuqqreqfOTgzS17iMv
+  y5nNIbARgT+3z/vUEAAwnc/18N4H4KpYNFp47QIDAQABAoIBAEjxfjgV9hqmVV59
+  aUn42uloqvqL/VOIAA22QINJY7+zZGhD0E61MjXXGvR5rlH4Z6g3yKKtr2+MLfCW
+  vuuYc6jJ1EssDuk4RAu9lWcFw6vZEX8GpPElGWoR3vgarfLOuipW+7AXrVzeisX5
+  /u9vSd4G1nfRB7cAwxJLPMG/mmOpNTNvVn9jYi9hxWlAYgPvsKMZ0bwUYsL++adc
+  ddxJjvIEkVt6U2i7SOqwLskC+OXM4wGw47gjaNHexh3ONTtBU1FYmxCzIMvpJYsO
+  hdA7DmMwoTtV0jbs6Fs10y2zhzd9IC/S1Hi7DbKSK3BwloyLYO/QkrbiuXCrzrKg
+  HJkF0CUCgYEA7hfy4gP8oGrIbAMaeuxi3KPPjY2B5NUPvuh7R2kDolWeHrySSjCj
+  3t15QYT6oXDU46GukRI7eXQqW15Hxy0nyVFeYOiMsIXlRVo4qQ+CwnNkunLelOfR
+  YFliQCWkvPT23DehrHZEEivnBVLh7y18+CYYDOJ1eMmUgRkLFOzXb48CgYEAz/AY
+  VvntvVCzNefv6ADiA5cgjjQ6mZNsv9RL31LIGCG3GaHPW9tEqe+687a6vvlPQ+Iq
+  N1veUq4d/hNFb2fJ6kRPSF4cZeoRp7hNYV4oMfhCaqGu6HMBJ73D4Is3/iM8VNc7
+  YwFUIYipSM0b6sdIQU0IdNlMtiQDFBFXSzioEcMCgYEAotj8hjxF2Q7QYJhKz1LJ
+  V7IvLtlfw7061M+8Kh6YnrrCuLEvudDE9JU072xd5HgBFGSsuorm5O5gXjgBDilD
+  cj3WOKA2QjKCm0nXQULbo9Y7Sg9xUBWyrpzUR523rIo8ImlmikglzOv8SjbjU60g
+  MbYUcxOdV21Axn/zhW9s9t8CgYEAjtDEptg5pRFMRPXsHFie4wBlZ8YPiXNr+cUB
+  53yf2ZMugvhTxy8uVdlFeiZC1O++tU0c2bDLXdYg22S5B+8tCy2nlnis4IKHZb57
+  xyg4SznLxBkQXK7AWF9JrWtxJadlxI+fRjyfX/jQ7COTzQjaY59Y84hb262YP6w5
+  XHypUqkCgYAStMjKqhVU0BxcqdYXLr1sqGrpk45RAeKywpryZSGZ+3GtII8S0OEt
+  Xs/Ndu8RH943n0RXbjnfpVmSsr2YaYgctkTXKRTXEtZO7oKfCw83dNyPqMic7gVK
+  afCa0DpZ/epFtjbSYXvwtka30Z8qPEApHErubovGu1jhrzkg+c3gJg==
+  -----END RSA PRIVATE KEY-----
+
+
+# Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
+pivnet_token: fZsf5VqNL-sDJb_PQQzm
+
+# Optional. If blank the cert(s) will be generated
+poe_ssl_name1:
+poe_ssl_cert1:
+poe_ssl_key1:
+
+poe_ssl_name2:
+poe_ssl_cert2:
+poe_ssl_key2:
+
+poe_ssl_name3:
+poe_ssl_cert3:
+poe_ssl_key3:
+
+# Request timeout for gorouter
+# It is recommended by both Pivotal and Microsoft that this value remain under 240 due to timeout configurations in Azure.
+router_request_timeout_in_seconds: 239
+
+# Optional - these certificates can be used to validate the certificates from incoming client requests.
+# All CA certificates should be appended together into a single collection of PEM-encoded entries.
+routing_custom_ca_certificates:
+
+# Support for the X-Forwarded-Client-Cert header. Possible values: (load_balancer|ha_proxy|router)
+routing_tls_termination: load_balancer
+
+
+# Setting appropriate Application Security Groups is critical for a secure
+# deployment. Change the value of the param below to "X" to acknowledge that
+# once the Elastic Runtime deployment completes, you will review and set the
+# appropriate application security groups.
+# See https://docs.pivotal.io/pivotalcf/opsguide/app-sec-groups.html
+security_acknowledgement: X
+
+# Whether to disable SSL cert verification for this environment.
+skip_cert_verify: true
+
+# If smtp_address is configured, smtp_from, smtp_port, smtp_user, smtp_pwd,
+# smtp_enable_starttls_auto, and smtp_auth_mechanism must also be set.
+smtp_address: smtp.gmail.com
+smtp_auth_mechanism: plain # (none|plain|cram-md5)
+smtp_enable_starttls_auto: true
+smtp_from: pcfnotif.systemgcp@gmail.com
+smtp_port: 587
+smtp_pwd: Klhjkh86687!@
+smtp_user: pcfnotif.systemgcp@gmail.com
+
+# Storage account and container that will be used for your terraform state
+azure_storage_container_name: terraformstate
+terraform_azure_access_key: kirPxe0Xqavm47aJ/2IyMXI0r44q53a/bSTh6D3wm0J7AobDBfAK+HYVVUPg1AUevlcHr+m1tX/Ip+B52OE0Ug==
+terraform_azure_account_name: agpcfci
+
+## Syslog endpoint configuration goes here
+# Optional. If syslog_host is specified, syslog_port, syslog_protocol,
+# syslog_drain_buffer_size, and enable_security_event_logging must be set.
+enable_security_event_logging: false
+syslog_drain_buffer_size: 10000
+syslog_host:
+syslog_port:
+syslog_protocol:
+
+## TCP routing and routing services
+ignore_ssl_cert_verification: false     # Whether to disable SSL cert verification for route services
+route_services: enable                  # Enable/disable route services (enable|disable)
+tcp_routing: disable                    # Enable/disable TCP routing (enable|disable)
+tcp_routing_ports:                      # A comma-separated list of ports and hyphen-separated port ranges, e.g. 52135,34000-35000,23478
+
+# Optional PEM-encoded certificates to add to BOSH VMs
+trusted_certificates:
+
+# Added by Andrew Gregory to support using a network in another resource group
+azure_network_resource_group: pcf-network-3600
+
